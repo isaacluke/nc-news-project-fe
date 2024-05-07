@@ -9,3 +9,7 @@ export function getAllArticles(paramsObj){
         params: paramsObj
     })
 }
+
+export function getArticle(article_id){
+    return api.get(`/articles/${article_id}`)
+}
