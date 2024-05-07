@@ -1,0 +1,3 @@
+exports.pageBtnArray = (currentPage, totalPages) => {
+
+}

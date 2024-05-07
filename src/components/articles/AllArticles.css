@@ -1,0 +1,52 @@
+ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 50px;
+  margin: auto;
+}
+
+.all-articles-card {
+  display: grid;
+  border: solid black 2px;
+  border-radius: 15px;
+  width: 280px;
+  padding: 20px;
+  grid-template-areas:
+    "topic author"
+    "title title"
+    "img img"
+    "votes-comments date";
+}
+
+#all-articles-title {
+  text-align: left;
+  grid-area: title;
+}
+
+#all-articles-topic {
+  grid-area: topic;
+}
+
+#all-articles-author {
+  text-align: right;
+  grid-area: author;
+}
+
+#all-articles-img {
+  grid-area: img;
+  width: 280px;
+  max-height: 280px;
+}
+
+#all-articles-votes-comments {
+  display: flex;
+  border: solid black 2px;
+  justify-content: space-between;
+  grid-area: votes-comments;
+}
+
+#all-articles-date {
+  grid-area: date;
+}
