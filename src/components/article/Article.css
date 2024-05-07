@@ -1,52 +1,53 @@
-ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 50px;
-  margin: auto;
-}
-
-.all-articles-card {
+.article {
   display: grid;
+  max-width: 900px;
   border: solid black 2px;
   border-radius: 15px;
-  width: 280px;
   padding: 20px;
   grid-template-areas:
     "topic author"
     "title title"
     "img img"
+    "body body"
     "votes-comments date";
 }
 
-#all-articles-title {
+#article-title {
   text-align: left;
   grid-area: title;
 }
 
-#all-articles-topic {
+#article-topic {
+  text-align: left;
   grid-area: topic;
 }
 
-#all-articles-author {
+#article-author {
   text-align: right;
   grid-area: author;
 }
 
-#all-articles-img {
+#article-img {
   grid-area: img;
-  width: 280px;
-  max-height: 280px;
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-#all-articles-votes-comments {
+#article-body {
+  text-align: left;
+  grid-area: body;
+}
+
+#article-votes-comments {
   display: flex;
   border: solid black 2px;
   justify-content: space-between;
   grid-area: votes-comments;
 }
 
-#all-articles-date {
+#article-date {
   grid-area: date;
 }
