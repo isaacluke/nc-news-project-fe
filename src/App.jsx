@@ -6,6 +6,7 @@ import AllArticles from "./components/all_articles/AllArticles";
 import Article from "./components/article/Article";
 
 function App() {
+
   return (
     <>
       <Header />

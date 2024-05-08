@@ -19,3 +19,7 @@ export function getArticleComments(article_id, paramsObj){
         params: paramsObj
     })
 }
+
+export function patchArticleVote(article_id, inc_votes){
+    return api.patch(`/articles/${article_id}`, {"inc_votes": inc_votes})
+}
