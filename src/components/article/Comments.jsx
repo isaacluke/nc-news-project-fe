@@ -14,6 +14,9 @@ export default function Comments({ article_id }) {
   const [paramsObj, setParamsObj] = useState({});
   const [commentsVisible, setCommentsVisible] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(true)
+
+
   useEffect(() => {
     const getParamEntries = () => {
       const params = {};
@@ -35,11 +38,15 @@ export default function Comments({ article_id }) {
   }, [searchParams]);
 
   function handleViewComments() {
+    setIsLoading(true)
     getArticleComments(article_id, paramsObj).then((commentData) => {
       setComments(commentData.data.comments);
       setTotalCount(commentData.data.total_count);
+      setIsLoading(false)
     });
   }
+
+
 
   return (
     <>
@@ -54,6 +61,7 @@ export default function Comments({ article_id }) {
         {commentsVisible ? "Hide Comments" : "View Comments"}
       </button>
       <div className={commentsVisible ? "comments-section" : "hidden"}>
+      <p>{isLoading? `Hang tight whilst we load your comments :)`: null}</p>
         {comments.map((comment) => {
           return <CommentCard key={comment.comment_id} comment={comment} />;
         })}

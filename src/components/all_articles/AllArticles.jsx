@@ -14,7 +14,10 @@ export default function AllArticles() {
   const [currentLimit, setCurrentLimit] = useState(10);
   const [paramsObj, setParamsObj] = useState({});
 
+  const [isLoading, setIsLoading] = useState(true)
+
   useEffect(() => {
+    setIsLoading(true)
     const getParamEntries = () => {
       const params = {};
       searchParams.entries().forEach(([param, value]) => {
@@ -32,8 +35,13 @@ export default function AllArticles() {
       setTotalPages(articlesData.data.page_count.total_pages);
       setTotalCount(articlesData.data.total_count);
       setArticles(articlesData.data.articles);
+      setIsLoading(false)
     });
   }, [searchParams]);
+
+  if(isLoading){
+    return <h2>Hang tight whilst we load your page {`:)`}</h2>
+  }
 
   return (
     <>
