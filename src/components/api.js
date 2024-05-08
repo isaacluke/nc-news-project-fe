@@ -13,3 +13,9 @@ export function getAllArticles(paramsObj){
 export function getArticle(article_id){
     return api.get(`/articles/${article_id}`)
 }
+
+export function getArticleComments(article_id, paramsObj){
+    return api.get(`/articles/${article_id}/comments`, {
+        params: paramsObj
+    })
+}

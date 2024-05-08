@@ -1,3 +1,0 @@
-exports.pageBtnArray = (currentPage, totalPages) => {
-
-}

@@ -6,6 +6,7 @@ import { GoComment } from "react-icons/go";
 import { FaRegHeart } from "react-icons/fa6";
 import  dayjs  from 'dayjs'
 import advancedFormat from 'dayjs/plugin/advancedFormat'
+import Comments from "./Comments";
 
 export default function Article (){
 
@@ -21,7 +22,9 @@ export default function Article (){
         })
     },[])
 
-    return (<article className="article">
+    return (<>
+    
+    <article className="article">
         <h2 id="article-title">{article.title}</h2>
       <h3 id="article-topic">{article.topic}</h3>
       <p id="article-author">{article.author}</p>
@@ -34,5 +37,7 @@ export default function Article (){
         <div> <GoComment /> {article.comment_count}</div>
       </div>
       <time id="article-date">{dayjs(article.created_at).format('Do MMM YYYY')}</time>
-    </article>)
+    </article>
+    <Comments article_id={article_id}/>
+    </>)
 }
