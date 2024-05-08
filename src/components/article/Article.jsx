@@ -31,7 +31,7 @@ export default function Article() {
       setArticle(articleData.data.article);
       setIsLoading(false);
     });
-  }, [isError]);
+  }, []);
 
   function handleThumbsUp(e) {
     if (isLiked) {
@@ -39,7 +39,6 @@ export default function Article() {
         return Number(currVote) - 1;
       });
       patchArticleVote(article_id, -1).catch((err) => {
-        console.log(err);
         setIsError(true);
       });
       setIsLiked(false);
@@ -49,18 +48,15 @@ export default function Article() {
           return Number(currVote) + 2;
         });
         patchArticleVote(article_id, 2).catch((err) => {
-          console.log(err);
           setIsError(true);
         });
         setIsLiked(true);
         setIsDisliked(false);
       } else {
-        setIsError(false)
         setOptimisticVote((currVote) => {
           return Number(currVote) + 1;
         });
         patchArticleVote(article_id, 1).catch((err) => {
-          console.log(err);
           setIsError(true);
         });
         setIsLiked(true);
@@ -74,7 +70,6 @@ export default function Article() {
         return Number(currVote) + 1;
       });
       patchArticleVote(article_id, 1).catch((err) => {
-        console.log(err);
         setIsError(true);
       });
       setIsDisliked(false);
@@ -83,19 +78,17 @@ export default function Article() {
         setOptimisticVote((currVote) => {
           return Number(currVote) - 2;
         });
-        patchArticleVote(article_id, -2).catch((err) => {
-          console.log(err);
+        patchArticleVote(article_id, -2)
+        .catch((err) => {
           setIsError(true);
         });
         setIsDisliked(true);
         setIsLiked(false);
       } else {
-        setIsError(false)
         setOptimisticVote((currVote) => {
           return Number(currVote) - 1;
         });
         patchArticleVote(article_id, -1).catch((err) => {
-          console.log(err);
           setIsError(true);
         });
         setIsDisliked(true);
