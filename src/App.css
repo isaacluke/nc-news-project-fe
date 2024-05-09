@@ -29,5 +29,8 @@
 
 .header-nav{
   grid-area: nav;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
 }
 

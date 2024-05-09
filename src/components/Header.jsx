@@ -20,6 +20,7 @@ export default function Header() {
         <img className="header-profile" src={user.avatar_url} />
       <nav className="header-nav">
         <Link to={`/articles`}>All Articles</Link>
+        <Link to={`/topics`}>Topics</Link>
       </nav>
     </header>
   );
