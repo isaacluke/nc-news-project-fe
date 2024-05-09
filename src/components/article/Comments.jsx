@@ -15,8 +15,7 @@ export default function Comments({ article_id }) {
   const [paramsObj, setParamsObj] = useState({});
   const [commentsVisible, setCommentsVisible] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(true)
-
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getParamEntries = () => {
@@ -39,23 +38,18 @@ export default function Comments({ article_id }) {
   }, [searchParams]);
 
   function handleViewComments() {
-    setIsLoading(true)
+    setIsLoading(true);
     getArticleComments(article_id, paramsObj).then((commentData) => {
       setComments(commentData.data.comments);
       setTotalCount(commentData.data.total_count);
-      setIsLoading(false)
+      setIsLoading(false);
     });
   }
 
-function handlePostComment(){
-
-}
-
   return (
-    <>
+    <section className="comments">
       <button
         onClick={() => {
-          handlePostComment()
           setCommentsVisible((curr) => {
             return !curr;
           });
@@ -65,11 +59,19 @@ function handlePostComment(){
         {commentsVisible ? "Hide Comments" : "View Comments"}
       </button>
       <div className={commentsVisible ? "comments-section" : "hidden"}>
-
-      <p>{isLoading? `Hang tight whilst we load your comments :)`: null}</p>
-      <CommentPost article_id={article_id} handleViewComments={handleViewComments}/>
+        <CommentPost
+          article_id={article_id}
+          handleViewComments={handleViewComments}
+        />
+        <p>{isLoading ? `Hang tight whilst we load your comments :)` : null}</p>
         {comments.map((comment) => {
-          return <CommentCard key={comment.comment_id} comment={comment} />;
+          return (
+            <CommentCard
+              key={comment.comment_id}
+              comment={comment}
+              handleViewComments={handleViewComments}
+            />
+          );
         })}
         <div className={commentsVisible ? "comments-pagination" : "hidden"}>
           <Pagination
@@ -83,6 +85,6 @@ function handlePostComment(){
           />
         </div>
       </div>
-    </>
+    </section>
   );
 }

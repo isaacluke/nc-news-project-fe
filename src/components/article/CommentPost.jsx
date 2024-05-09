@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { UsernameContext } from "../../contexts/Username";
 import { postArticleComment } from "../api";
 
-export default function CommentPost({article_id, handleViewComments}) {
+export default function CommentPost({ article_id, handleViewComments }) {
   const { username } = useContext(UsernameContext);
   const [commentText, setCommentText] = useState("");
   const [isPosting, setIsPosting] = useState(false);
@@ -12,26 +12,24 @@ export default function CommentPost({article_id, handleViewComments}) {
   function handleArticleComment(e) {
     setCommentText(e.target.value);
   }
-  function handleCommentSubmit(e){
-    setIsError(false)
-    e.preventDefault()
-    setIsPosting(true)
+  function handleCommentSubmit(e) {
+    e.preventDefault();
+    setIsError(false);
+    setIsPosting(true);
     postArticleComment(article_id, username, commentText)
-    .then(()=>{
-        setIsPosting(false)
-        setIsPosted(true)
-        handleViewComments()
-        setTimeout(()=>{
-            setIsPosted(false)
-            setCommentText("")
-            e.target.disabled = false
-        },2000)
-    })
-    .catch((err)=>{
-        e.target.disabled = false
-        setIsError(true)
-    })
-    e.currentTarget.disabled=true
+      .then(() => {
+        setIsPosting(false);
+        setIsPosted(true);
+        handleViewComments();
+        setCommentText("");
+        setTimeout(() => {
+          setIsPosted(false);
+        }, 1000);
+      })
+      .catch(() => {
+        setIsError(true);
+      });
+    e.currentTarget.disabled = true;
   }
 
   return (
@@ -46,12 +44,12 @@ export default function CommentPost({article_id, handleViewComments}) {
           onChange={(e) => {
             handleArticleComment(e);
           }}
-
         ></textarea>
         <button
           onClick={(e) => {
             handleCommentSubmit(e);
           }}
+          disabled={commentText.length === 0}
         >
           {isError
             ? "Whoopsie!"
@@ -62,7 +60,11 @@ export default function CommentPost({article_id, handleViewComments}) {
             : "Post"}
         </button>
       </form>
-      <p>{isError? "That comment didn't go through :( Please refresh and try again": null}</p>
+      <p>
+        {isError
+          ? "That comment didn't go through :( Please refresh and try again"
+          : null}
+      </p>
     </div>
   );
 }

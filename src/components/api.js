@@ -34,3 +34,7 @@ export function postArticleComment(article_id, username, commentText){
         body: commentText
     })
 }
+
+export function deleteComment(comment_id){
+    return api.delete(`/comments/${comment_id}`)
+}
