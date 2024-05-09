@@ -14,6 +14,7 @@ export default function CommentPost({ article_id, handleViewComments }) {
   }
   function handleCommentSubmit(e) {
     e.preventDefault();
+    e.currentTarget.disabled = true;
     setIsError(false);
     setIsPosting(true);
     postArticleComment(article_id, username, commentText)
@@ -29,7 +30,6 @@ export default function CommentPost({ article_id, handleViewComments }) {
       .catch(() => {
         setIsError(true);
       });
-    e.currentTarget.disabled = true;
   }
 
   return (

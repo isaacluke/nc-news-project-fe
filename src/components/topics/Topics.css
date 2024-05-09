@@ -1,0 +1,10 @@
+.topic-card{
+    border: 2px solid black;
+    border-radius: 15px;
+    margin: 20px;
+}
+
+.topic-card a {
+    display: block;
+    padding: 10px; 
+  }
