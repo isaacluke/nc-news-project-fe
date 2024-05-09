@@ -52,6 +52,10 @@
   grid-area: date;
 }
 
+.comments{
+  max-width: 944px;
+}
+
 .hidden{
   display: none;
 }
@@ -74,4 +78,19 @@
     padding: 20px;
     margin: 15px;
     margin-top: 15px;
+}
+
+.deleting{
+  border-color: grey;
+  background-color: rgba(211, 211, 211, 0.381);
+}
+
+.error{
+  border-color: red;
+  background-color: rgba(249, 121, 121, 0.365);
+}
+
+.error-msg{
+  font-size: large;
+  color: rgb(255, 0, 0);
 }
