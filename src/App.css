@@ -5,4 +5,29 @@
   text-align: center;
 }
 
+.header{
+  display: grid;
+  align-items: center;
+  grid-template-columns: auto 80px;
+  padding: 0.5rem;
+  grid-template-areas: 
+    "title profile"
+    "nav nav";
+}
+
+.header-title{
+  grid-area: title;
+}
+
+.header-profile{
+  grid-area: profile;
+  height: 80px;
+  width: 80px;
+  border: 2px solid black;
+  border-radius: 50%;
+}
+
+.header-nav{
+  grid-area: nav;
+}
 
