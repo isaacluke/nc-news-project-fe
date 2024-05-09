@@ -4,6 +4,7 @@ import { getArticleComments } from "../api";
 import CommentCard from "./CommentCard";
 import Pagination from "../Pagination";
 import { useSearchParams } from "react-router-dom";
+import CommentPost from "./CommentPost";
 
 export default function Comments({ article_id }) {
   const [comments, setComments] = useState([]);
@@ -46,22 +47,27 @@ export default function Comments({ article_id }) {
     });
   }
 
+function handlePostComment(){
 
+}
 
   return (
     <>
       <button
         onClick={() => {
-          handleViewComments();
+          handlePostComment()
           setCommentsVisible((curr) => {
             return !curr;
           });
+          handleViewComments();
         }}
       >
         {commentsVisible ? "Hide Comments" : "View Comments"}
       </button>
       <div className={commentsVisible ? "comments-section" : "hidden"}>
+
       <p>{isLoading? `Hang tight whilst we load your comments :)`: null}</p>
+      <CommentPost article_id={article_id} handleViewComments={handleViewComments}/>
         {comments.map((comment) => {
           return <CommentCard key={comment.comment_id} comment={comment} />;
         })}

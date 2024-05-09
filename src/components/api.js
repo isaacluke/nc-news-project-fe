@@ -23,3 +23,14 @@ export function getArticleComments(article_id, paramsObj){
 export function patchArticleVote(article_id, inc_votes){
     return api.patch(`/articles/${article_id}`, {"inc_votes": inc_votes})
 }
+
+export function getUser(username){
+    return api.get(`/users/${username}`)
+}
+
+export function postArticleComment(article_id, username, commentText){
+    return api.post(`/articles/${article_id}/comments`, {
+        username: username,
+        body: commentText
+    })
+}
