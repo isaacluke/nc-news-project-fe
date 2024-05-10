@@ -5,6 +5,7 @@ import CommentCard from "./CommentCard";
 import Pagination from "../Pagination";
 import { useSearchParams } from "react-router-dom";
 import CommentPost from "./CommentPost";
+import ErrorMsg from "../ErrorMsg";
 
 export default function Comments({ article_id }) {
   const [comments, setComments] = useState([]);
@@ -15,6 +16,8 @@ export default function Comments({ article_id }) {
   const [paramsObj, setParamsObj] = useState({});
   const [commentsVisible, setCommentsVisible] = useState(false);
 
+  const [isError, setIsError] = useState(false)
+  const [errorObj, setErrorObj] = useState({})
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -38,11 +41,17 @@ export default function Comments({ article_id }) {
   }, [searchParams]);
 
   function handleViewComments() {
+    setIsError(false)
     setIsLoading(true);
     getArticleComments(article_id, paramsObj).then((commentData) => {
       setComments(commentData.data.comments);
       setTotalCount(commentData.data.total_count);
       setIsLoading(false);
+    }).catch((err)=>{
+      console.log(err)
+      setIsError(true)
+      setCommentsVisible(false)
+      setErrorObj(err)
     });
   }
 
@@ -55,10 +64,12 @@ export default function Comments({ article_id }) {
           });
           handleViewComments();
         }}
+        className={isError? "error": null}
       >
         {commentsVisible ? "Hide Comments" : "View Comments"}
       </button>
-      <div className={commentsVisible ? "comments-section" : "hidden"}>
+      {isError && <ErrorMsg errorObj={errorObj}/> }
+      <div className={isError? "hidden": commentsVisible ? "comments-section" : "hidden"}>
         <CommentPost
           article_id={article_id}
           handleViewComments={handleViewComments}

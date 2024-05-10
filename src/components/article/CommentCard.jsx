@@ -2,7 +2,7 @@ import "./Article.css";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import { useContext, useState } from "react";
-import { MdDelete } from "react-icons/md";
+import { BsTrashFill } from "react-icons/bs";
 import { UsernameContext } from "../../contexts/Username";
 import { deleteComment } from "../api";
 
@@ -34,7 +34,9 @@ export default function CommentCard({ comment, handleViewComments }) {
         }}
         disabled={isError}
       >
-        {isError ? <MdDelete /> : isDeleting ? "Deleting..." : <MdDelete />}
+        {isError ? <BsTrashFill />
+ : isDeleting ? "Deleting..." : <BsTrashFill />
+}
       </button>
     );
   }

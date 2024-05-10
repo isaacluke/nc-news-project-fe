@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import "./AllArticles.css";
-import { GoComment } from "react-icons/go";
-import { FaRegHeart } from "react-icons/fa6";
-import  dayjs  from 'dayjs'
-import advancedFormat from 'dayjs/plugin/advancedFormat'
+import { BsChatLeftText } from "react-icons/bs";
+import { BsHeart } from "react-icons/bs";
+import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat";
 
 export default function AllArticlesCard({ article }) {
-  dayjs.extend(advancedFormat)
+  dayjs.extend(advancedFormat);
   return (
     <Link to={`/articles/${article.article_id}`}>
       <li className="all-articles-card">
@@ -17,15 +17,17 @@ export default function AllArticlesCard({ article }) {
         <div id="all-articles-votes-comments">
           <div>
             {" "}
-            <FaRegHeart />
+            <BsHeart />
             {article.votes}
           </div>
           <div>
-            <GoComment />
+            <BsChatLeftText />
             {article.comment_count}
           </div>
         </div>
-        <time id="all-articles-date">{dayjs(article.created_at).format('Do MMM YYYY')}</time>
+        <time id="all-articles-date">
+          {dayjs(article.created_at).format("Do MMM YYYY")}
+        </time>
       </li>
     </Link>
   );
