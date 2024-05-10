@@ -5,6 +5,7 @@ import "./AllArticles.css";
 import { useSearchParams } from "react-router-dom";
 import Pagination from "../Pagination";
 import AllArticlesFilter from "./AllArticlesFilter";
+import ErrorMsg from "../ErrorMsg";
 
 export default function AllArticles() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -16,6 +17,7 @@ export default function AllArticles() {
   const [paramsObj, setParamsObj] = useState({});
 
   const [isLoading, setIsLoading] = useState(true);
+  const [errorObj, setErrorObj] = useState(null)
 
   useEffect(() => {
     setIsLoading(true);
@@ -37,8 +39,14 @@ export default function AllArticles() {
       setTotalCount(articlesData.data.total_count);
       setArticles(articlesData.data.articles);
       setIsLoading(false);
+    }).catch((err)=>{
+      setErrorObj(err)
     });
   }, [searchParams]);
+
+  if(errorObj){
+    return <ErrorMsg errorObj={errorObj}/>
+  }
 
   if (isLoading) {
     return <h2>Hang tight whilst we load your page {`:)`}</h2>;

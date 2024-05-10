@@ -6,6 +6,7 @@ import AllArticles from "./components/all_articles/AllArticles";
 import Article from "./components/article/Article";
 import { UsernameProvider } from "./contexts/Username";
 import Topics from "./components/topics/Topics";
+import ErrorPage from "./components/ErrorPage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/articles" element={<AllArticles />} />
         <Route path="/articles/:article_id" element={<Article />} />
         <Route path="/topics" element={<Topics />} />
+        <Route path="*" element={<ErrorPage/>}/>
       </Routes>
     </UsernameProvider>
   );
