@@ -4,6 +4,7 @@ import AllArticlesCard from "./AllArticlesCard";
 import "./AllArticles.css";
 import { useSearchParams } from "react-router-dom";
 import Pagination from "../Pagination";
+import AllArticlesFilter from "./AllArticlesFilter";
 
 export default function AllArticles() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -14,10 +15,10 @@ export default function AllArticles() {
   const [currentLimit, setCurrentLimit] = useState(10);
   const [paramsObj, setParamsObj] = useState({});
 
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoading(true)
+    setIsLoading(true);
     const getParamEntries = () => {
       const params = {};
       searchParams.entries().forEach(([param, value]) => {
@@ -35,18 +36,23 @@ export default function AllArticles() {
       setTotalPages(articlesData.data.page_count.total_pages);
       setTotalCount(articlesData.data.total_count);
       setArticles(articlesData.data.articles);
-      setIsLoading(false)
+      setIsLoading(false);
     });
   }, [searchParams]);
 
-  if(isLoading){
-    return <h2>Hang tight whilst we load your page {`:)`}</h2>
+  if (isLoading) {
+    return <h2>Hang tight whilst we load your page {`:)`}</h2>;
   }
 
   return (
     <>
-      <h1>All Articles</h1>
+      <h1>{paramsObj.topic ? paramsObj.topic : "All Articles"} </h1>
       <section>
+        <AllArticlesFilter
+          paramsObj={paramsObj}
+          setParamsObj={setParamsObj}
+          setSearchParams={setSearchParams}
+        />
         <ul>
           {articles.map((article) => {
             return (
